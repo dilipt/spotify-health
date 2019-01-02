@@ -25,11 +25,14 @@
   "homepage": "https://github.com/dilipt/spotify-health#readme",
   "dependencies": {
     "koa": "^2.6.2",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "eslint": "^5.11.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.2",
+    "jest": "^23.6.0"
   }
 }
