@@ -2,7 +2,7 @@
 Spotify Health Check API. Web front-end coming soon!
 
 ### Installation
-`npm install`
+`npm install`  
 `tsc`
 
 ### Running
