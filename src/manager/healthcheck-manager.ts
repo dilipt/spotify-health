@@ -22,7 +22,7 @@ export class HealthCheckManagerImpl implements HealthCheckManager {
     return this.sessionStore.get(id);
   }
 
-  currentHealthChecks(): any {
+  currentHealthChecks(): Array<{id: string, name: string, date: Date }> {
     return this.sessionStore.getAll().map(healthcheck => ({
       id: healthcheck.id,
       name: healthcheck.name,
