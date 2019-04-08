@@ -1,8 +1,9 @@
 import * as uuid from 'uuid/v1';
 import { HealthCheck } from '../models';
+import { HealthCheckFactory } from './';
 
-const HealthCheckFactory = () => {
-  const create = (name: string): HealthCheck => {
+export class HealthCheckFactoryImpl implements HealthCheckFactory {
+  create(name: string): HealthCheck {
     return {
       name,
       id: uuid(),
@@ -14,10 +15,4 @@ const HealthCheckFactory = () => {
       ]
     }
   }
-
-  return { create }
-}
-
-export {
-  HealthCheckFactory
 }
