@@ -41,7 +41,7 @@ describe('HealthChecks integration tests', () => {
     const healthcheck = sessionStore.get(healthcheckId);
     expect(healthcheck.id).toBe(healthcheckId);
     expect(healthcheck.name).toBe('test-check');
-    expect(healthcheck.areas.length).toBe(3);
+    expect(healthcheck.indicators.length).toBe(3);
 
     expect(healthcheckManager.getHealthCheck(healthcheckId)).toBe(healthcheck);
     expect(healthcheckManager.currentHealthChecks().length).toBe(1);

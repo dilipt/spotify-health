@@ -6,7 +6,7 @@ const Scores = {
 
 const HealthCheckManager = ({ healthcheckFactory, sessionStore, log }) => {
   function createHealthCheck(name) {
-    const healthcheck = healthcheckFactory.create(name);
+    const healthcheck = healthcheckFactory.init(name).build();
     if (sessionStore.getAll().find(hc => hc.name === name)) {
       log.warn({ healthcheck: name }, 'healthcheck already exists.');
       throw Error('healthcheck already exists');
