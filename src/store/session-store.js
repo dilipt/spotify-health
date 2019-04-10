@@ -1,4 +1,4 @@
-const SessionStore = () => {
+const InMemorySessionStore = () => {
   const sessions = new Map();
 
   function get(healthcheckId) {
@@ -22,5 +22,5 @@ const SessionStore = () => {
 };
 
 module.exports = {
-  SessionStore,
+  InMemorySessionStore,
 };
