@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc",
-    "start": "node dist/App.js"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -25,10 +24,7 @@
   },
   "homepage": "https://github.com/dilipt/spotify-health#readme",
   "dependencies": {
-    "@types/koa": "^2.0.48",
-    "@types/koa-bodyparser": "^4.2.2",
-    "@types/koa-router": "^7.0.40",
-    "@types/uuid": "^3.4.4",
+    "bunyan": "^1.8.12",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
