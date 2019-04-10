@@ -37,6 +37,7 @@ describe('HealthCheckFactory', () => {
       .build();
 
     expect(hc.indicators.length).toBe(4);
+    expect(hc.indicators.map(ind => ind.name)).toContain('Quality');
   });
 
   test('should remove indicators too', () => {
@@ -50,5 +51,6 @@ describe('HealthCheckFactory', () => {
       .build();
 
     expect(hc.indicators.length).toBe(2);
+    expect(hc.indicators.find(ind => ind.name === 'Learning')).toBeUndefined();
   });
 });
