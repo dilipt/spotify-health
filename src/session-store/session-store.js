@@ -5,9 +5,13 @@ const InMemorySessionStore = () => {
     return sessions.get(healthcheckId);
   }
 
-  function store(healthcheck) {
+  function put(healthcheck) {
     sessions.set(healthcheck.id, healthcheck);
     return healthcheck.id;
+  }
+
+  function remove(healthcheckId) {
+    sessions.delete(healthcheckId);
   }
 
   function getAll() {
@@ -17,7 +21,8 @@ const InMemorySessionStore = () => {
   return {
     get,
     getAll,
-    store,
+    put,
+    delete: remove,
   };
 };
 

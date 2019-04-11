@@ -1,40 +1,40 @@
 jest.mock('uuid/v1');
 const uuid = require('uuid/v1');
-const { HealthCheckFactory } = require('./healthcheck-factory');
+const { HealthCheckBuilder } = require('./healthcheck-builder');
 
-const MockLogger = () => {
-  function info() {}
-  return { info };
-};
-
-describe('HealthCheckFactory', () => {
+describe('HealthCheckBuilder', () => {
   beforeEach(() => {
     jest.resetAllMocks();
+  });
+
+  test('should initialise and set healthcheckId', () => {
+    uuid.mockImplementation(() => 'my-little-id');
+
+    const builder = HealthCheckBuilder('sup');
+    expect(builder.id).toBe('mylittleid');
   });
 
   test('should create default healthcheck', () => {
     uuid.mockImplementation(() => 'healthcheckId');
 
-    const factory = HealthCheckFactory({ log: MockLogger() });
-
-    const hc = factory
-      .init('my-check')
-      .build();
+    const hc = HealthCheckBuilder('my-check').build();
 
     expect(hc.name).toBe('my-check');
     expect(hc.id).toBe('healthcheckId');
     expect(hc.indicators.length).toBe(3);
+    hc.indicators.forEach((indicator) => {
+      expect(indicator.scores).toEqual([]);
+      expect(indicator.trends).toEqual([]);
+    });
   });
 
   test('should add extra indicators', () => {
     uuid.mockImplementation(() => 'healthcheckId');
 
-    const factory = HealthCheckFactory({ log: MockLogger() });
-
-    const hc = factory
-      .init('my-check')
+    const builder = HealthCheckBuilder('my-other-check');
+    const hc = builder
       .addIndicator('Quality', 'Quality description')
-      .build();
+      .current();
 
     expect(hc.indicators.length).toBe(4);
     expect(hc.indicators.map(ind => ind.name)).toContain('Quality');
@@ -43,12 +43,10 @@ describe('HealthCheckFactory', () => {
   test('should remove indicators too', () => {
     uuid.mockImplementation(() => 'healthcheckId');
 
-    const factory = HealthCheckFactory({ log: MockLogger() });
-
-    const hc = factory
-      .init('checky-checkerson')
+    const builder = HealthCheckBuilder('checkliest');
+    const hc = builder
       .removeIndicator('Learning')
-      .build();
+      .current();
 
     expect(hc.indicators.length).toBe(2);
     expect(hc.indicators.find(ind => ind.name === 'Learning')).toBeUndefined();
