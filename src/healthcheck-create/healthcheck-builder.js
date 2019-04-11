@@ -6,19 +6,22 @@ const HealthCheckBuilder = (name) => {
     id,
     name,
     indicators: [{
-      name: 'Learning', descriptionGreen: 'green Learning description', descriptionRed: 'red Learning description',
+      name: 'Learning', textAwesome: 'green Learning description', textCrap: 'red Learning description',
     }, {
-      name: 'Speed', descriptionGreen: 'Speed description', descriptionRed: 'red Speed description',
+      name: 'Speed', textAwesome: 'Speed description', textCrap: 'red Speed description',
     }, {
-      name: 'Codebase', descriptionGreen: 'Codebase description', descriptionRed: 'red Codebase description',
+      name: 'Codebase', textAwesome: 'Codebase description', textCrap: 'red Codebase description',
     }],
   };
 
-  function addIndicator(indicatorName, descriptionGreen, descriptionRed) {
+  function addIndicator(indicatorName, textAwesome, textCrap) {
+    healthcheck.indicators = healthcheck
+      .indicators
+      .filter(indicator => indicator.name !== indicatorName);
     healthcheck.indicators.push({
       name: indicatorName,
-      descriptionGreen,
-      descriptionRed,
+      textAwesome,
+      textCrap,
     });
     return this;
   }

@@ -14,7 +14,7 @@ describe('HealthCheckBuilder', () => {
     expect(builder.id).toBe('mylittleid');
   });
 
-  test('should create default healthcheck', () => {
+  test('should build healthcheck with score and trend collectors', () => {
     uuid.mockImplementation(() => 'healthcheckId');
 
     const hc = HealthCheckBuilder('my-check').build();
@@ -33,11 +33,24 @@ describe('HealthCheckBuilder', () => {
 
     const builder = HealthCheckBuilder('my-other-check');
     const hc = builder
-      .addIndicator('Quality', 'Quality description')
+      .addIndicator('Quality', 'Quality description', 'Quality crap desc')
       .current();
 
     expect(hc.indicators.length).toBe(4);
     expect(hc.indicators.map(ind => ind.name)).toContain('Quality');
+  });
+
+  test('adding same indicator name should overwrite previous', () => {
+    uuid.mockImplementation(() => 'healthcheckId');
+
+    const builder = HealthCheckBuilder('another-check');
+    const hc = builder
+      .addIndicator('Kwality', 'Kwality 1', 'another')
+      .addIndicator('Kwality', 'Kwality 2', 'another 2')
+      .current();
+
+    expect(hc.indicators.find(indicator => indicator.name === 'Kwality').textAwesome).toEqual('Kwality 2');
+    expect(hc.indicators.find(indicator => indicator.name === 'Kwality').textCrap).toEqual('another 2');
   });
 
   test('should remove indicators too', () => {

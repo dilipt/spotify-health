@@ -20,8 +20,8 @@ const HealthCheckCreatorRouter = ({ buildStore, sessionStore, log }) => {
     else {
       builder.addIndicator(
         ctx.params.indicator,
-        ctx.request.body.descriptionGreen,
-        ctx.request.body.descriptionRed,
+        ctx.request.body.textAwesome,
+        ctx.request.body.textCrap,
       );
       buildStore.put(builder);
       ctx.status = 202;
