@@ -1,4 +1,4 @@
-const InMemoryHealthCheckBuildStore = () => {
+const InMemoryCreatorStore = () => {
   const creations = new Map();
 
   function put(builder) {
@@ -22,5 +22,5 @@ const InMemoryHealthCheckBuildStore = () => {
 };
 
 module.exports = {
-  InMemoryHealthCheckBuildStore,
+  InMemoryCreatorStore,
 };

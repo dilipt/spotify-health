@@ -1,5 +1,5 @@
-const { HealthCheckCreatorRouter } = require('./create-routes');
+const { CreatorRouter } = require('./create-routes');
 
 module.exports = {
-  HealthCheckCreatorRouter,
+  CreatorRouter,
 };

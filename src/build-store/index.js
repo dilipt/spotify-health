@@ -1,5 +1,5 @@
-const { InMemoryHealthCheckBuildStore } = require('./build-store');
+const { InMemoryCreatorStore } = require('./build-store');
 
 module.exports = {
-  InMemoryHealthCheckBuildStore,
+  InMemoryCreatorStore,
 };

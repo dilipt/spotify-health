@@ -2,11 +2,11 @@ const Router = require('koa-router');
 const BodyParser = require('koa-bodyparser');
 const { HealthCheckBuilder } = require('./healthcheck-builder');
 
-const HealthCheckCreatorRouter = ({ buildStore, sessionStore, log }) => {
-  const createRouter = new Router({ prefix: '/healthchecks' });
+const CreatorRouter = ({ buildStore, sessionStore, log }) => {
+  const createRouter = new Router({ prefix: '/creator' });
   createRouter.use(BodyParser());
 
-  createRouter.post('/', async (ctx) => {
+  createRouter.post('/new', async (ctx) => {
     const healthcheckName = ctx.request.body.name;
     const builder = HealthCheckBuilder(healthcheckName);
     buildStore.put(builder);
@@ -56,5 +56,5 @@ const HealthCheckCreatorRouter = ({ buildStore, sessionStore, log }) => {
 };
 
 module.exports = {
-  HealthCheckCreatorRouter,
+  CreatorRouter,
 };
