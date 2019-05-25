@@ -1,7 +1,9 @@
 const Router = require('koa-router');
+const BodyParser = require('koa-bodyparser');
 
 const SessionRouter = ({ sessionStore, log }) => {
   const router = new Router({ prefix: '/sessions' });
+  router.use(BodyParser());
 
   router.get('/', async (ctx) => {
     const sessions = sessionStore.getAll();
@@ -9,15 +11,24 @@ const SessionRouter = ({ sessionStore, log }) => {
     ctx.status = 200;
   });
 
-  router.get('/:healthcheckId', async (ctx) => {
+  router.use(async (ctx, next) => {
     const session = sessionStore.get(ctx.params.healthcheckId);
     if (!session) {
-      log.warn({ healthcheckId: ctx.params.healthcheckId }, 'no healthcheck registered for given healthcheckId.');
       ctx.status = 404;
     } else {
-      ctx.body = session;
-      ctx.status = 200;
+      ctx.state.session = session;
+      await next();
     }
+  });
+
+  router.get('/:healthcheckId', async (ctx) => {
+    ctx.body = ctx.state.session;
+    ctx.status = 200;
+  });
+
+  router.put('/:healthcheckId/participants/', async (ctx) => {
+    const { session } = ctx.state;
+    session.participants.push(ctx.request.body);
   });
 
   return router;
