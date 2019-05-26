@@ -11,10 +11,12 @@ const SessionRouter = ({ sessionStore, log }) => {
     ctx.status = 200;
   });
 
-  router.use(async (ctx, next) => {
+  router.use('/:healthcheckId', async (ctx, next) => {
+    log.info({ healthcheckId: ctx.params.healthcheckId }, 'fetching healthcheck...');
     const session = sessionStore.get(ctx.params.healthcheckId);
     if (!session) {
       ctx.status = 404;
+      ctx.body = { message: 'healthcheck not found.' };
     } else {
       ctx.state.session = session;
       await next();
@@ -26,10 +28,10 @@ const SessionRouter = ({ sessionStore, log }) => {
     ctx.status = 200;
   });
 
-  router.put('/:healthcheckId/participants/', async (ctx) => {
-    const { session } = ctx.state;
-    session.participants.push(ctx.request.body);
-  });
+  // router.put('/:healthcheckId/participants/', async (ctx) => {
+  //   const { session } = ctx.state;
+  //   session.participants.push(ctx.request.body);
+  // });
 
   return router;
 };

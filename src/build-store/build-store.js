@@ -1,9 +1,10 @@
-const InMemoryCreatorStore = () => {
+const InMemoryCreatorStore = ({ log }) => {
   const creations = new Map();
 
   function put(builder) {
     if (!builder.id) throw Error('build has no id present');
     creations.set(builder.id, builder);
+    log.info({ healthchecks: [...creations.keys()] }, 'storing healthcheck session.');
   }
 
   function get(id) {

@@ -14,10 +14,13 @@ const CreatorRouter = ({ buildStore, sessionStore, log }) => {
     ctx.body = builder.current();
   });
 
-  createRouter.use(async (ctx, next) => {
+  createRouter.use('/:healthcheckId/', async (ctx, next) => {
+    log.info({ healthcheckId: ctx.params.healthcheckId }, 'fetching healthcheck...');
     const builder = buildStore.get(ctx.params.healthcheckId);
-    if (!builder) ctx.status = 404;
-    else {
+    if (!builder) {
+      ctx.status = 404;
+      ctx.body = { message: 'healthcheck not found.' };
+    } else {
       ctx.state.builder = builder;
       await next();
     }

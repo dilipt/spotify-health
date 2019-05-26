@@ -7,7 +7,7 @@ const { CreatorRouter } = require('./healthcheck-create');
 const { SessionManager, SessionRouter } = require('./healthcheck-session');
 
 const log = Bunyan.createLogger({ name: 'spotify-health' });
-const buildStore = InMemoryCreatorStore();
+const buildStore = InMemoryCreatorStore({ log });
 const sessionStore = InMemorySessionStore();
 const creatorRouter = CreatorRouter({ buildStore, sessionStore, log });
 const sessionRouter = SessionRouter({ sessionStore, log });
