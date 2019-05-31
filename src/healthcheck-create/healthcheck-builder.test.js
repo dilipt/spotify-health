@@ -21,7 +21,7 @@ describe('HealthCheckBuilder', () => {
 
     expect(hc.name).toBe('my-check');
     expect(hc.id).toBe('healthcheckId');
-    expect(hc.indicators.length).toBe(3);
+    expect(hc.indicators.length).toBe(10);
     hc.indicators.forEach((indicator) => {
       expect(indicator.scores).toEqual([]);
       expect(indicator.trends).toEqual([]);
@@ -36,7 +36,7 @@ describe('HealthCheckBuilder', () => {
       .addIndicator('Quality', 'Quality description', 'Quality crap desc')
       .current();
 
-    expect(hc.indicators.length).toBe(4);
+    expect(hc.indicators.length).toBe(11);
     expect(hc.indicators.map(ind => ind.name)).toContain('Quality');
   });
 
@@ -61,7 +61,7 @@ describe('HealthCheckBuilder', () => {
       .removeIndicator('Learning')
       .current();
 
-    expect(hc.indicators.length).toBe(2);
+    expect(hc.indicators.length).toBe(9);
     expect(hc.indicators.find(ind => ind.name === 'Learning')).toBeUndefined();
   });
 });

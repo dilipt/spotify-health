@@ -1,17 +1,12 @@
 const uuid = require('uuid/v1');
+const defaultIndicators = require('./default-indicators');
 
 const HealthCheckBuilder = (name) => {
   const id = uuid().replace(/-/g, '');
   const healthcheck = {
     id,
     name,
-    indicators: [{
-      name: 'Learning', textAwesome: 'green Learning description', textCrap: 'red Learning description',
-    }, {
-      name: 'Speed', textAwesome: 'Speed description', textCrap: 'red Speed description',
-    }, {
-      name: 'Codebase', textAwesome: 'Codebase description', textCrap: 'red Codebase description',
-    }],
+    indicators: defaultIndicators,
   };
 
   function addIndicator(indicatorName, textAwesome, textCrap) {
