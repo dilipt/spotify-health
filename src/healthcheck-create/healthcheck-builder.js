@@ -1,5 +1,6 @@
 const uuid = require('uuid/v1');
 const defaultIndicators = require('./default-indicators');
+const { HealthCheck } = require('./models');
 
 const HealthCheckBuilder = (name) => {
   const id = uuid().replace(/-/g, '');
@@ -33,14 +34,11 @@ const HealthCheckBuilder = (name) => {
   }
 
   function build() {
-    healthcheck.startDate = new Date().getTime();
-    healthcheck.indicators = healthcheck.indicators.map(indicator => ({
-      ...indicator,
-      scores: [],
-      trends: [],
-      participants: [],
-    }));
-    return healthcheck;
+    return new HealthCheck({
+      id: healthcheck.id,
+      name: healthcheck.name,
+      indicators: healthcheck.indicators,
+    });
   }
 
   return {

@@ -22,10 +22,10 @@ describe('HealthCheckBuilder', () => {
     expect(hc.name).toBe('my-check');
     expect(hc.id).toBe('healthcheckId');
     expect(hc.indicators.length).toBe(10);
+    expect(hc.participants.length).toBe(0);
     hc.indicators.forEach((indicator) => {
       expect(indicator.scores).toEqual([]);
       expect(indicator.trends).toEqual([]);
-      expect(indicator.participants).toEqual([]);
     });
   });
 
