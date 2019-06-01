@@ -14,7 +14,7 @@ describe('HealthCheckBuilder', () => {
     expect(builder.id).toBe('mylittleid');
   });
 
-  test('should build healthcheck with score and trend collectors', () => {
+  test('should build healthcheck with score, trend, and participant collectors', () => {
     uuid.mockImplementation(() => 'healthcheckId');
 
     const hc = HealthCheckBuilder('my-check').build();
@@ -25,6 +25,7 @@ describe('HealthCheckBuilder', () => {
     hc.indicators.forEach((indicator) => {
       expect(indicator.scores).toEqual([]);
       expect(indicator.trends).toEqual([]);
+      expect(indicator.participants).toEqual([]);
     });
   });
 

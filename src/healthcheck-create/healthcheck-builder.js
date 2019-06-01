@@ -38,6 +38,7 @@ const HealthCheckBuilder = (name) => {
       ...indicator,
       scores: [],
       trends: [],
+      participants: [],
     }));
     return healthcheck;
   }
