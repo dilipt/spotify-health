@@ -14,9 +14,9 @@ const creatorRouter = CreatorRouter({ buildStore, sessionStore, log });
 const sessionRouter = SessionRouter({ sessionStore, log });
 
 const app = new Koa();
+app.use(cors());
 app.use(creatorRouter.routes());
 app.use(sessionRouter.routes());
-app.use(cors());
 
 const httpServer = http.createServer(app.callback());
 const sessionManager = SessionManager({ httpServer, sessionStore, log });
