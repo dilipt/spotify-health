@@ -28,10 +28,11 @@ const SessionRouter = ({ sessionStore, log }) => {
     ctx.status = 200;
   });
 
-  // router.put('/:healthcheckId/participants/', async (ctx) => {
-  //   const { session } = ctx.state;
-  //   session.participants.push(ctx.request.body);
-  // });
+  router.put('/:healthcheckId/participants', async (ctx) => {
+    const { session } = ctx.state;
+    session.addParticipant(ctx.request.body);
+    ctx.status = 201;
+  });
 
   return router;
 };
