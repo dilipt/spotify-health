@@ -21,5 +21,5 @@ app.use(sessionRouter.routes());
 const httpServer = http.createServer(app.callback());
 const sessionManager = SessionManager({ httpServer, sessionStore, log });
 
-httpServer.listen(3000);
-log.info('app listening on 3000.');
+httpServer.listen(3001);
+log.info('app listening on 3001.');
