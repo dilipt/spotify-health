@@ -30,8 +30,9 @@ const SessionRouter = ({ sessionStore, log }) => {
 
   router.put('/:healthcheckId/participants', async (ctx) => {
     const { session } = ctx.state;
-    session.addParticipant(ctx.request.body);
+    const participant = session.addParticipant(ctx.request.body);
     ctx.status = 201;
+    ctx.body = participant;
   });
 
   return router;

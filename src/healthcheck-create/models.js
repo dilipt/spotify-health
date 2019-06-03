@@ -19,14 +19,12 @@ class HealthCheck {
     }));
   }
 
-  addParticipant(participant) {
-    const match = this.participants.filter(p => p.id === participant.id);
-    const exists = match.length > 0;
-    if (exists) {
-      match[0] = participant;
-    } else {
-      this.participants.push(participant);
-    }
+  addParticipant(request) {
+    const id = Math.random().toString(36).slice(2);
+    const participant = new Participant({ id, name: request.name });
+
+    this.participants.push(participant);
+    return participant;
   }
 }
 
