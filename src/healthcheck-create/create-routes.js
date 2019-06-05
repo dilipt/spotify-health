@@ -2,7 +2,9 @@ const Router = require('koa-router');
 const BodyParser = require('koa-bodyparser');
 const { HealthCheckBuilder } = require('./healthcheck-builder');
 
-const CreatorRouter = ({ buildStore, sessionStore, log }) => {
+const CreatorRouter = ({
+  buildStore, sessionStore, socketManager, log,
+}) => {
   const createRouter = new Router({ prefix: '/creator' });
   createRouter.use(BodyParser());
 
@@ -51,6 +53,7 @@ const CreatorRouter = ({ buildStore, sessionStore, log }) => {
     const healthcheck = builder.build();
     sessionStore.put(healthcheck);
     buildStore.delete(builder.id);
+    socketManager.createNamespace(healthcheck.id);
     ctx.status = 200;
     ctx.body = healthcheck;
   });

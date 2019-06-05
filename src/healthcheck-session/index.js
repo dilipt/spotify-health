@@ -1,7 +1,7 @@
-const { SessionManager } = require('./session-manager');
+const SocketManager = require('./socket-manager');
 const { SessionRouter } = require('./session-routes');
 
 module.exports = {
-  SessionManager,
+  SocketManager,
   SessionRouter,
 };
