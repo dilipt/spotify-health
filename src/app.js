@@ -13,7 +13,7 @@ const sessionStore = InMemorySessionStore();
 const creatorRouter = CreatorRouter({
   buildStore, sessionStore, socketManager: SocketManager, log,
 });
-const sessionRouter = SessionRouter({ sessionStore, log });
+const sessionRouter = SessionRouter({ sessionStore, socketManager: SocketManager, log });
 
 const app = new Koa();
 app.use(cors());

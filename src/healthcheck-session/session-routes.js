@@ -1,7 +1,7 @@
 const Router = require('koa-router');
 const BodyParser = require('koa-bodyparser');
 
-const SessionRouter = ({ sessionStore, log }) => {
+const SessionRouter = ({ sessionStore, socketManager, log }) => {
   const router = new Router({ prefix: '/sessions' });
   router.use(BodyParser());
 
@@ -31,6 +31,7 @@ const SessionRouter = ({ sessionStore, log }) => {
   router.put('/:healthcheckId/participants', async (ctx) => {
     const { session } = ctx.state;
     const participant = session.addParticipant(ctx.request.body);
+    socketManager.newParticipant(ctx.params.healthcheckId, participant);
     ctx.status = 201;
     ctx.body = participant;
   });
