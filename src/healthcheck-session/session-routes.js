@@ -24,6 +24,15 @@ const SessionRouter = ({ sessionStore, socketManager, log }) => {
   });
 
   router.get('/:healthcheckId', async (ctx) => {
+    const participantPasskey = ctx.query.passkey;
+    const validParticipant = ctx.state.session.participants.some(
+      p => p.passkey === participantPasskey,
+    );
+
+    if (validParticipant) {
+      ctx.status = 404;
+      ctx.body = { message: 'healthcheck not found.' };
+    }
     ctx.body = ctx.state.session;
     ctx.status = 200;
   });

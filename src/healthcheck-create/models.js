@@ -1,7 +1,10 @@
+const uuid = require('uuid/v1');
+
 class Participant {
   constructor({ id, name }) {
     this.id = id;
     this.name = name;
+    this.passkey = uuid();
   }
 }
 
@@ -19,9 +22,11 @@ class HealthCheck {
     }));
   }
 
-  addParticipant(request) {
-    const id = Math.random().toString(36).slice(2);
-    const participant = new Participant({ id, name: request.name });
+  addParticipant({ username, browserKey }) {
+    const participant = new Participant({
+      id: browserKey,
+      name: username,
+    });
 
     this.participants.push(participant);
     return participant;
