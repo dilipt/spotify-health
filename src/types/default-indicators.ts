@@ -1,4 +1,4 @@
-module.exports = [
+export const defaultIndicators = [
   {
     name: 'Easy to release',
     textAwesome: 'Releasing is simple, safe, painless & mostly automated.',
